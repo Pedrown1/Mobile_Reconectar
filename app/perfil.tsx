@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, View, TextInput, Text, TouchableOpacity, KeyboardTypeOptions, Modal, Alert } from 'react-native';
+import { Image, StyleSheet, View, TextInput, Text, TouchableOpacity, KeyboardTypeOptions, Modal, Alert, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
@@ -39,50 +39,58 @@ export default function Perfil() {
         setModalVisible(false);
         router.push(screen as Href<string | object>);
     };
-    
 
     return (
         <LinearGradient colors={['#deb887', '#a28259']} start={[0, 0.1]} end={[1, 0.9]} style={styles.gradient}>
-            <View style={styles.containerMain}>
-                <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.menuIcon}>
-                    <Ionicons name="menu-outline" size={35} color="#fff" />
-                </TouchableOpacity>
-                <View style={styles.profileSection}>
-                    <Image source={{ uri: image || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' }} style={styles.profileImage} />
-                    <TouchableOpacity onPress={pickImage} style={styles.btnPickImage}>
-                        <Text style={styles.txtBtnPickImage}>Escolher Imagem</Text>
-                    </TouchableOpacity>
-                </View>
-                {renderTextInput('Nome Pessoal', 'Digite seu nome pessoal')}
-                {renderTextInput('Usuário', 'Digite seu nome de usuário')}
-                {renderTextInput('Email', 'Digite seu email', 'email-address' as KeyboardTypeOptions)}
-                <Text style={styles.textInput}>Sobre</Text>
-                <TextInput
-                    style={styles.textLong}
-                    multiline
-                    numberOfLines={4}
-                    placeholder="Escreva algo sobre você..."
-                    placeholderTextColor="#cdcdcd"
-                />
-                    <TouchableOpacity 
-                        style={styles.btnSalvar} 
-                        onPress={() => {
-                            Alert.alert(
-                                "Sucesso", 
-                                "Informações salvas com sucesso!", 
-                                [
-                                    {
-                                        text: "OK", 
-                                        onPress: () => router.push('/welcome')
-                                    }
-                                ]
-                            );
-                        }}
-                    >
-                        <Text style={styles.txtBtnSalvar}>Salvar</Text>
-                    </TouchableOpacity>
-
-            </View>
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            >
+                <ScrollView
+                    contentContainerStyle={styles.scrollContainer}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <View style={styles.containerMain}>
+                        <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.menuIcon}>
+                            <Ionicons name="menu-outline" size={35} color="#fff" />
+                        </TouchableOpacity>
+                        <View style={styles.profileSection}>
+                            <Image source={{ uri: image || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' }} style={styles.profileImage} />
+                            <TouchableOpacity onPress={pickImage} style={styles.btnPickImage}>
+                                <Text style={styles.txtBtnPickImage}>Escolher Imagem</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {renderTextInput('Nome Pessoal', 'Digite seu nome pessoal')}
+                        {renderTextInput('Usuário', 'Digite seu nome de usuário')}
+                        {renderTextInput('Email', 'Digite seu email', 'email-address' as KeyboardTypeOptions)}
+                        <Text style={styles.textInput}>Sobre</Text>
+                        <TextInput
+                            style={styles.textLong}
+                            multiline
+                            numberOfLines={4}
+                            placeholder="Escreva algo sobre você..."
+                            placeholderTextColor="#cdcdcd"
+                        />
+                        <TouchableOpacity 
+                            style={styles.btnSalvar} 
+                            onPress={() => {
+                                Alert.alert(
+                                    "Sucesso", 
+                                    "Informações salvas com sucesso!", 
+                                    [
+                                        {
+                                            text: "OK", 
+                                            onPress: () => router.push('/welcome')
+                                        }
+                                    ]
+                                );
+                            }}
+                        >
+                            <Text style={styles.txtBtnSalvar}>Salvar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
 
             <Modal
                 animationType="slide"
@@ -115,6 +123,8 @@ export default function Perfil() {
 
 const styles = StyleSheet.create({
     gradient: { flex: 1 },
+    container: { flex: 1 },
+    scrollContainer: { flexGrow: 1, justifyContent: 'center' },
     containerMain: {
         paddingHorizontal: 20,
         backgroundColor: '#fff',
