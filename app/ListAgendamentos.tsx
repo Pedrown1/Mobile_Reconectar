@@ -12,6 +12,7 @@ interface Agendamento {
 const agendamentos: Agendamento[] = [
   { id: '1', nome: 'João da Silva', data: '2024-08-09', hora: '10:00' },
   { id: '2', nome: 'Maria Oliveira', data: '2024-08-10', hora: '14:00' },
+  { id: '3', nome: 'Pedro Henrique', data: '2024-08-11', hora: '17:00' },
 ];
 
 const ListAgendamentos: React.FC = () => {

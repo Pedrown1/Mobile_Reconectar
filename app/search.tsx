@@ -38,7 +38,7 @@ const psychologists: Psychologist[] = [
     rating: 4,
     image: require('../assets/images/LogoPrincipal.png'),
     approach: 'Fisioterapeuta',
-    description: 'Investiga como a fisioterapia pélvica pode desempenhar um papel crucial na recuperação de funções, alívio de sintomas e promoção do bem-estar íntimo. Através de técnicas especializadas, ela não apenas melhora a função muscular e a saúde da região pélvica, mas também contribui para uma qualidade de vida mais equilibrada e confortável, oferecendo suporte essencial para enfrentar desafios relacionados à saúde íntima.',
+    description: 'Analisa o impacto do Pilates no fortalecimento do core e na melhoria da postura e flexibilidade.',
   },
   {
     id: '4',
@@ -89,19 +89,16 @@ export default function Search() {
   const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter(); 
 
-  // Abre o modal com as informações da psicóloga
   const handleOpenModal = (psychologist: Psychologist) => {
     setSelectedPsychologist(psychologist);
     setModalVisible(true);
   };
 
-  // Fecha o modal
   const handleCloseModal = () => {
     setModalVisible(false);
     setSelectedPsychologist(null);
   };
 
-  // Navega para a tela de agendamentos
   const handleNavigateToAppointments = (psychologist: Psychologist) => {
     router.push({
       pathname: '/agendar',
@@ -112,7 +109,6 @@ export default function Search() {
   };
   
 
-  // Renderiza o cartão da psicóloga
   const renderPsychologistCard = ({ item }: { item: Psychologist }) => (
     <View style={styles.card}>
       <Image source={item.image} style={styles.cardImage} />
@@ -158,7 +154,7 @@ export default function Search() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder="Nome da Psicologa"
+          placeholder="Nome da Profissional"
           placeholderTextColor="#888"
         />
         <Ionicons name="search" size={32} color="#4d4d4d" style={styles.searchIcon} />

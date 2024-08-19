@@ -26,7 +26,7 @@ export default function Welcome() {
           <Text style={styles.title}>Realize seu agendamento de maneira eficaz</Text>
           <Text style={styles.text}>Faça o login para começar!</Text>
           
-          <Link href="/signUp" asChild>
+          <Link href="/perfil" /*signUp*/ asChild>
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText}>Cadastrar</Text>
             </TouchableOpacity>

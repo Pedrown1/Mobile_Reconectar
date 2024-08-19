@@ -18,7 +18,7 @@ export default function SignIn() {
     >
       <View style={styles.container}>
         <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
-          <Text style={styles.message}>Bem-Vindo(a)</Text>
+          <Text style={styles.message}>Bem-Vindo(a)!</Text>
         </Animatable.View>
 
         <Animatable.View animation="fadeInUp" style={styles.containerForm}>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerHeader: {
-    marginTop: "14%",
+    marginTop: "20%",
     marginBottom: "8%",
     paddingStart: "5%"
   },

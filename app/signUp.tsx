@@ -33,9 +33,18 @@ export default function SignIn() {
             </Animatable.View>
 
             <Animatable.View animation="fadeInUp" style={styles.containerForm}>
-              <Text style={styles.title}>Nome de Usuário</Text>
+              
+            <Text style={styles.title}>Digite seu Nome</Text>
               <TextInput
-                placeholder="Crie um nome de Usuário.."
+                placeholder="Digite seu Nome"
+                placeholderTextColor="#999"
+                style={styles.input}
+              />
+
+              
+              <Text style={styles.title}>Digite seu Usuário</Text>
+              <TextInput
+                placeholder="Digite seu nome de Usuário"
                 placeholderTextColor="#999"
                 style={styles.input}
               />
@@ -103,7 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerHeader: {
-    marginTop: "14%",
+    marginTop: "18%",
     marginBottom: "8%",
     paddingStart: "5%",
   },
@@ -118,8 +127,8 @@ const styles = StyleSheet.create({
     marginRight: 30,
   },
   image: {
-    width: 65,
-    height: 65,
+    width: 70,
+    height: 70,
   },
   containerForm: {
     backgroundColor: "#FFF",
@@ -146,7 +155,8 @@ const styles = StyleSheet.create({
   },
   eyeIcon: {
     position: 'absolute',
-    right: 10,
+    right: 15,
+    bottom: 25
   },
   passwordInput: {
     flex: 1,
@@ -163,6 +173,11 @@ const styles = StyleSheet.create({
     marginTop: 25,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
     color: "#FFF",
