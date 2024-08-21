@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, Modal, FlatList, GestureResponderEvent } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image, Modal, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
-import { useRouter } from 'expo-router'; 
+import { useRouter } from 'expo-router';
 
 interface Psychologist {
   id: string;
   name: string;
   rating: number;
-  image: any; 
+  image: any;
   approach: string;
   description: string;
 }
 
 const psychologists: Psychologist[] = [
-
   {
     id: '1',
     name: 'Dany Queiroz',
@@ -66,7 +65,6 @@ const psychologists: Psychologist[] = [
   }
 ];
 
-
 const RatingStars = ({ rating }: { rating: number }) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
@@ -87,7 +85,7 @@ const RatingStars = ({ rating }: { rating: number }) => {
 export default function Search() {
   const [selectedPsychologist, setSelectedPsychologist] = useState<Psychologist | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleOpenModal = (psychologist: Psychologist) => {
     setSelectedPsychologist(psychologist);
@@ -107,27 +105,29 @@ export default function Search() {
       },
     });
   };
-  
 
   const renderPsychologistCard = ({ item }: { item: Psychologist }) => (
-    <View style={styles.card}>
-      <Image source={item.image} style={styles.cardImage} />
-      <View style={styles.cardContent}>
-        <Text style={styles.cardName}>{item.name}</Text>
-        <RatingStars rating={item.rating} />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => handleOpenModal(item)}
-        >
-          <Text style={styles.buttonText}>Ver perfil</Text>
-        </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => handleNavigateToAppointments(item)}
+    >
+      <View style={styles.card2}>
+        <Image source={item.image} style={styles.cardImage} />
+        <View style={styles.cardContent}>
+          <Text style={styles.cardName}>{item.name}</Text>
+          <RatingStars rating={item.rating} />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => handleOpenModal(item)}
+          >
+            <Text style={styles.buttonText}>Ver perfil</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity
-        onPress={() => handleNavigateToAppointments(item)}
-      >
-        <Ionicons name="arrow-forward" size={24} color="#4d4d4d" style={styles.arrowIcon} />
-      </TouchableOpacity>
-    </View>
+      <View style={styles.arrowContainer}>
+        <Ionicons name="arrow-forward" size={24} color="#4d4d4d"  />
+      </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -165,7 +165,7 @@ export default function Search() {
         renderItem={renderPsychologistCard}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.cardList}
-        showsVerticalScrollIndicator={false} 
+        showsVerticalScrollIndicator={false}
       />
 
       {selectedPsychologist && (
@@ -254,17 +254,27 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   card: {
-    flexDirection: 'row',
+    flexDirection: "row",
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#d3d3d3', // #008000 | #CCC | #A28259
     borderRadius: 10,
-    marginBottom: 20, 
-    padding: 15,
+    marginBottom: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 }, 
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 6,
+    position: 'relative', 
+  },
+  card2: {
+    width: "85%",
+    backgroundColor: "#FFF",
+    padding: 15,
+    flexDirection: 'row',
+    borderStartStartRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderEndEndRadius: 50,
+    borderStartEndRadius: 10
   },
   cardImage: {
     width: 80,
@@ -274,12 +284,12 @@ const styles = StyleSheet.create({
   cardContent: {
     flex: 1,
     marginLeft: 15,
-    paddingRight: 20, 
+    paddingRight: 20,
   },
   cardName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: "#4d4d4d"
+    color: "#4d4d4d",
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -300,18 +310,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     alignSelf: 'flex-start',
     borderWidth: 0.5,
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.3, 
-    shadowRadius: 4, 
-    elevation: 4, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
   },
   buttonText: {
     fontSize: 14,
     color: '#000',
   },
-  arrowIcon:{
-    marginRight: 10
+  arrowContainer: {
+    position: 'absolute',
+    right: 9,
+    top: '50%',
+    transform: [{ translateY: -12 }],
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    padding: 8,
+    elevation: 3,
   },
   modalBackground: {
     flex: 1,
@@ -326,10 +343,10 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     elevation: 10,
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 4 }, 
-    shadowOpacity: 0.3, 
-    shadowRadius: 6, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
   },
   modalImage: {
     width: 120,
@@ -351,7 +368,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#333',
     marginBottom: 30,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   modalButton: {
     backgroundColor: '#d3d3d3',
@@ -359,7 +376,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
-  modalButton2:{
+  modalButton2: {
     backgroundColor: "red",
     borderRadius: 12,
     paddingVertical: 10,
@@ -369,12 +386,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000',
   },
-  modalButtonText2:{
+  modalButtonText2: {
     fontSize: 16,
     color: '#FFF',
   },
-  btnModal:{
+  btnModal: {
     flexDirection: "row",
-    gap: 10
+    gap: 10,
   }
 });
