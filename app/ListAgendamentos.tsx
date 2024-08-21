@@ -13,9 +13,18 @@ interface Agendamento {
 }
 
 const agendamentos: Agendamento[] = [
-  { id: '1', nome: 'João da Silva', data: '09/08/2024', hora: '10:00', psicologa: 'Dany Queiroz' },
-  { id: '2', nome: 'Maria Oliveira', data: '10/08/2024', hora: '14:00', psicologa: 'Natalia Silva' },
-  { id: '3', nome: 'Pedro Henrique', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '1', nome: 'Lucas Almeida', data: '09/08/2024', hora: '10:00', psicologa: 'Dany Queiroz' },
+    { id: '2', nome: 'Fernanda Costa', data: '10/08/2024', hora: '14:00', psicologa: 'Natalia Silva' },
+    { id: '3', nome: 'Gabriel Souza', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '4', nome: 'Julia Lima', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '5', nome: 'Ricardo Barbosa', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '6', nome: 'Amanda Ribeiro', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '7', nome: 'Bruno Oliveira', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '8', nome: 'Carla Mendes', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '9', nome: 'Felipe Santos', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '10', nome: 'Mariana Silva', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+    { id: '11', nome: 'Thiago Ferreira', data: '11/08/2024', hora: '17:00', psicologa: 'Izadora Pena' },
+   
 ];
 
 const ListAgendamentos: React.FC = () => {
@@ -113,9 +122,9 @@ const ListAgendamentos: React.FC = () => {
             <TouchableOpacity style={styles.modalButton} onPress={() => handleNavigate('/search')}>
               <Text style={styles.modalButtonText}>Profissionais</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalButton} onPress={() => handleNavigate('/agendar')}>
+            {/* <TouchableOpacity style={styles.modalButton} onPress={() => handleNavigate('/agendar')}>
               <Text style={styles.modalButtonText}>Realizar Agendamento</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={[styles.modalButton, styles.logoutButton]} onPress={() => console.log('Logout')}>
               <Text style={styles.modalButtonText}>Encerrar Sessão</Text>
             </TouchableOpacity>
